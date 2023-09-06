@@ -16,16 +16,7 @@ void setup(){
 
 void loop(){
   int chk = DHT.read11(DHT11_PIN);
-  int tC = DHT.temperature;
-  int tF = (int)round(1.8 * tC + 32);
-
-  // Define the desired y-axis range
-  int yMin = -10; // Minimum value
-  int yMax = 100; // Maximum value
-
-  // Scale the temperature value to fit the range
-  int scaledTemp = map(tF, -40, 125, yMin, yMax); // Assuming a temperature range of -40°C to 125°C
-
+  int tF = (int)round(1.8*(DHT.temperature)+32);
   lcd.setCursor(0,0); 
   lcd.print("Temp: ");
   lcd.print(tF);
@@ -41,13 +32,8 @@ void loop(){
   Serial.println(" F");
   Serial.println("Humidity = ");
   Serial.println(DHT.humidity);
+ 
 
-  // Send the scaled temperature value to the Serial Plotter
-  Serial.print(0);
-  Serial.print(",");
-  Serial.print(scaledTemp);
-  Serial.print("");
-  Serial.print(10);
 
   delay(2000);
 }
